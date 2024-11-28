@@ -1,12 +1,8 @@
--- Y combinator
+import Unsafe.Coerce
+
 y :: (a -> a) -> a
-y f = (\x -> f (x x)) (\x -> f (x x))
+y = \f -> (\x -> f (unsafeCoerce x x))(\x -> f (unsafeCoerce x x))
 
--- 用範例展示如何使用 Y 組合子定義遞歸
-factorial :: (Integer -> Integer) -> Integer -> Integer
-factorial _ 0 = 1
-factorial f n = n * f (n - 1)
-
--- 使用 Y 組合子求階乘
-main :: IO ()
-main = print (y factorial 5)  -- 輸出 120
+-- Ref: [Y Combinator in Haskell](http://stackoverflow.com/questions/4273413/y-combinator-in-haskell)
+-- a fibonacci example
+main = putStrLn $ show $ y (\fact -> \n -> if n < 2 then 1 else n * fact (n - 1)) 5
