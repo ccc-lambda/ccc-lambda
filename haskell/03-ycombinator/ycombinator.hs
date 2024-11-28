@@ -1,3 +1,4 @@
+-- from: https://gist.github.com/JustinSDK/9c6c82775f422cc87a73
 import Unsafe.Coerce
 
 y :: (a -> a) -> a
